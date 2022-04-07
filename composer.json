@@ -1,0 +1,16 @@
+{
+    "name": "mainardes/projeto_crud",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mainardes\\ProjetoCrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "allanmainardes",
+            "email": "fernandomainardes1@gmail.com"
+        }
+    ],
+    "require": {}
+}
