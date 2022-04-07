@@ -53,11 +53,11 @@ body {
 table.table tr th,
 table.table tr td {
     border-color: #e9e9e9;
-    padding: 20px 20px;
+    padding: 10px 10px;
     vertical-align: middle;
 }
 table.table tr th:first-child {
-    width: 60px;
+    max-width: 300px;
 }
 table.table tr th:last-child {
     width: 100px;

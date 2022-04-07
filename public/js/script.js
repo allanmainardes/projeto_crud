@@ -1,9 +1,31 @@
-var formUpdate = document.getElementById("editEmployee");
-if (formUpdate.addEventListener) {
-    formUpdate.addEventListener("submit", validateForm);
-} else if (formUpdate.attachEvent) {
-    formUpdate.attachEvent("onsubmit", validateForm);
-}
+var add = document.getElementById("addEmployeeModal");
+add.addEventListener("focus", function () {}, false);
+add.addEventListener(
+    "click",
+    function () {
+        var formAdd = document.getElementById("addEmployee");
+        if (formAdd.addEventListener) {
+            formAdd.addEventListener("submit", validateForm);
+        } else if (formAdd.attachEvent) {
+            formAdd.attachEvent("onsubmit", validateForm);
+        }
+    },
+    false
+);
+var update = document.getElementById("editEmployeeModal");
+update.addEventListener("focus", function () {}, false);
+update.addEventListener(
+    "click",
+    function () {
+        var formUpdate = document.getElementById("editEmployee");
+        if (formUpdate.addEventListener) {
+            formUpdate.addEventListener("submit", validateForm);
+        } else if (formUpdate.attachEvent) {
+            formUpdate.attachEvent("onsubmit", validateForm);
+        }
+    },
+    false
+);
 
 $(document).ready(function () {
     var countResults = document.getElementById("count-results");
@@ -33,10 +55,6 @@ function fillModalupdateEmployee(
     document.getElementById("cpfFuncModal").value = cpfFunc;
     document.getElementById("emailFuncModal").value = emailFunc;
     document.getElementById("dtNascimentoFuncModal").value = dtNascimentoFunc;
-}
-
-function teste() {
-    console.log();
 }
 
 function validateForm(evt) {
@@ -125,4 +143,11 @@ function validateForm(evt) {
     if (contErro > 0) {
         evt.preventDefault();
     }
+}
+function clearFields() {
+    document.getElementById("idFuncModal").value = "";
+    document.getElementById("nomeFuncModal").value = "";
+    document.getElementById("cpfFuncModal").value = "";
+    document.getElementById("emailFuncModal").value = "";
+    document.getElementById("dtNascimentoFuncModal").value = "";
 }
