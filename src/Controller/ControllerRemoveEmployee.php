@@ -25,7 +25,7 @@ class ControllerRemoveEmployee implements InterfaceControllerRequest
         }
         
 
-        header('Location: /list-employees?rm=success', true, 302);
+        header('Location: /list-employees', true, 302); 
     }
 }
 

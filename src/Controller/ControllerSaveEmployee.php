@@ -25,28 +25,31 @@ class ControllerSaveEmployee implements InterfaceControllerRequest
             'dtNascimentoFunc' => trim(strip_tags($_POST['dtNascimentoFunc'])),
         ];
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-        $id = $_GET['id'];
-        if ( !isset( $_POST ) || empty( $_POST ) ) {
-	        throw new Exception("Você deve preencher os dados!");
-        }else{
+        $id = $_POST['idFunc'];
+        if ( !isset( $_POST ) || empty( $_POST ) ) 
+        {
+	        throw new Exception("Dados incompletos!");
+        }else
+        {
             $rulesEmployee = new RulesEmployee();
-            $rulesEmployee->validateName($_POST['nomeFunc']);
+            if(!$rulesEmployee->validateData($aData)){
+                throw new Exception("Dados inválidos!");
+            }
         }
         
-        if(!is_null($id) && $id !== false){
+        if(!is_null($id) && $id !== false)
+        {
             $aData['idFunc'] = $id;
-            $employee = $this->mapperEmployee->updateEmployee($aData);
+            $this->mapperEmployee->updateEmployee($aData);
 
-        }else{
-            $employee = $this->mapperEmployee->addEmployee($aData);
+        }else
+        {
+            $this->mapperEmployee->addEmployee($aData);
         }
 
         
 
-        header('Location: /list-employees', true, 302);
+        header('Location: /', true, 302);
     }
 }
 

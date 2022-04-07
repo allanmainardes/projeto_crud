@@ -1,13 +1,23 @@
 <?php 
 
 namespace Mainardes\ProjetoCrud\Rules;
-
+require_once 'is_email.php';
 use Exception;
 
 class RulesEmployee
 {   
+    public function validateData($aData){
+        if($this->validateName($aData['nomeFunc']) ||
+        $this->validateCpf($aData['cpfFunc']) ||
+        $this->validateEmail($aData['emailFunc']) ||
+        $this->validateData($aData['dtNascimentoFunc'])){
+            return true;
+        } else{
+            return false;
+        }
+    }
 
-    public function validateName($employeeName, $maxCharacter = 100)
+    public function validateName($employeeName, $maxCharacter = 100):bool
     {
         if(!is_null($employeeName) 
             || is_string($employeeName) 
@@ -16,64 +26,62 @@ class RulesEmployee
         {
             return true;
         }else{
-            throw new Exception("Erro no preenchimento do nome!");
+            return false;
         }
     }
 
-    public function validateCpf($cpfInformado = null):bool
+    public function validateCpf($employeeCpf = null):bool
     {
         // Verifica se um número foi informado
-        if (empty($cpfInformado)) {
+        if (empty($employeeCpf)) 
+        {
             return false;
         }
         // Elimina possivel mascara
-        $cpfInformadoOnlyNumbers = preg_replace("/[^0-9]/", "", $cpfInformado);
-
-        $cpf = $cpfInformadoOnlyNumbers;
+        $employeeCpfOnlyNumbers = preg_replace("/[^0-9]/", "", $employeeCpf);
 
         // Verifica se o numero de digitos informados é igual a 11
-        if (strlen($cpf) != 11) {
+        if (strlen($employeeCpfOnlyNumbers) != 11) 
+        {
             return false;
         } 
         // Verifica se nenhuma das sequências invalidas abaixo
         // foi digitada. Caso afirmativo, retorna falso
-        else if ($cpf == '00000000000' 
-            || $cpf == '11111111111' 
-            || $cpf == '22222222222' 
-            || $cpf == '33333333333' 
-            || $cpf == '44444444444' 
-            || $cpf == '55555555555' 
-            || $cpf == '66666666666' 
-            || $cpf == '77777777777' 
-            || $cpf == '88888888888' 
-            || $cpf == '99999999999') {
+        else if ($employeeCpfOnlyNumbers == '00000000000' 
+            || $employeeCpfOnlyNumbers == '11111111111' 
+            || $employeeCpfOnlyNumbers == '22222222222' 
+            || $employeeCpfOnlyNumbers == '33333333333' 
+            || $employeeCpfOnlyNumbers == '44444444444' 
+            || $employeeCpfOnlyNumbers == '55555555555' 
+            || $employeeCpfOnlyNumbers == '66666666666' 
+            || $employeeCpfOnlyNumbers == '77777777777' 
+            || $employeeCpfOnlyNumbers == '88888888888' 
+            || $employeeCpfOnlyNumbers == '99999999999') 
+            {
             return false;
             // Calcula os digitos verificadores para verificar se o
             // CPF é válido
-        } else {
-            $dv = []; //para armazenar os DVs
-            $cpfSemDigitos = substr($cpf, 0,9);
-            for ($t = 9; $t < 11; $t ++) {
+        } 
+        return true;
+    }
 
-                for ($d = 0, $c = 0; $c < $t; $c ++) {
-                    $d += $cpf{$c} * (($t + 1) - $c);
-                }
-                $d = ((10 * $d) % 11) % 10;
-                $dv[] = $d;
-                if ($cpf{$c} != $d) {
-                    return false;
-                }
-            }
-            $cpfComDigitosCalculados = $cpfSemDigitos.$dv[0].$dv[1];
-
-            $isOkDv1 = $dv[0] == $cpf[9]; //primeira posição do DV
-            $isOkDv2 = $dv[1] == $cpf[10]; //segunda posição do DV
-            $isOkSemDigitos = $cpfComDigitosCalculados === $cpfInformadoOnlyNumbers;
-
-            return ($isOkDv1 && $isOkDv2 && $isOkSemDigitos);
+    public function validateEmail($employeeEmail = null):bool
+    {
+        if(is_email($employeeEmail)){
+            return true;
+        }else{
+            return false;
         }
     }
 
+    public function validateDate($employeeBirthday = null):bool
+    {
+        if(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $employeeBirthday)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

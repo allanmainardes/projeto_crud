@@ -20,8 +20,7 @@ class ControllerListEmployees implements InterfaceControllerRequest
         $employees = $this->mapperEmployee->findAllEmployees();
         $titulo = 'Listar Funcionarios';
         $resultados = count($employees);
-        // require_once(__DIR__ . "/../View/employees/ListEmployees.php");
-        require_once(__DIR__ . "/../View/employees/teste.php");
+        require_once(__DIR__ . "/../View/employees/template.php");
         
     }
 }

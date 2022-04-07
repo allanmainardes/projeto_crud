@@ -9,35 +9,24 @@
 						<h2><?=$titulo;?></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar</span></a>
+						<a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar</span></a>
 					</div>
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
-						</th>
 						<th>Nome</th>
 						<th>CPF</th>
 						<th>Email</th>
 						<th>Estado Civil</th>
 						<th>Data Nascimento</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
                     <?php foreach($employees as $employee): ?>
 					<tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox<?=$employee['id_func'];?>" name="options[]" value="<?=$employee['id_func'];?>">
-								<label for="checkbox<?=$employee['id_func'];?>"></label>
-							</span>
-						</td>
 						<td id="tdNome"><?= $employee['nome_func'] ?></td>
                         <td id="tdCpf"><?= $employee['cpf_func'] ?></td>
                         <td id="tdEmail"><?= $employee['email_func'] ?></td>
@@ -45,7 +34,7 @@
                         <td id="tdDtNascimento"><?= $employee['dt_nascimento_func'] ?></td>
 						<td value = "<?=$employee['id_func'];?>">
 							<a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" onclick="fillModalupdateEmployee('<?=$employee['id_func'];?>', '<?=$employee['nome_func'];?>', '<?=$employee['cpf_func'];?>', '<?=$employee['email_func'];?>', '<?=$employee['dt_nascimento_func'];?>')">&#xE254;</i></a>
-							<a href="#deleteEmployeeModal" value="teste" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete" >&#xE872;</i></a>
+							<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete" >&#xE872;</i></a>
 						</td>
 					</tr>
                     <?php endforeach; ?>
@@ -105,11 +94,12 @@
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form id="editEmployee" >
+			<form id="editEmployee" action="/save-employee" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Edit Employee</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
+				<input type="hidden" id="idFuncModal" name="idFunc">
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>Nome</label>
@@ -143,7 +133,7 @@
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="button" class="btn btn-info" value="Save" onclick="saveEmployeeUpdates()">
+					<input type="submit" class="btn btn-info" value="Save">
 				</div>
 			</form>
 		</div>
