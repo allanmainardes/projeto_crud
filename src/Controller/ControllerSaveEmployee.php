@@ -37,7 +37,7 @@ class ControllerSaveEmployee implements InterfaceControllerRequest
             }
         }
         
-        if(!is_null($id) && $id !== false)
+        if(!is_null($id) && $id !== false && $id !== "")
         {
             $aData['idFunc'] = $id;
             $this->mapperEmployee->updateEmployee($aData);
