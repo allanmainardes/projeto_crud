@@ -62,7 +62,7 @@
 					</div>
 					<div class="form-group">
 						<label>CPF</label>
-						<input type="text" name="cpfFunc" id="cpfFunc" class="form-control" pattern="[0-9]{11}"required>
+						<input type="text" name="cpfFunc" id="cpfFunc" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
@@ -108,7 +108,7 @@
 					</div>
 					<div class="form-group">
 						<label>CPF</label>
-						<input type="text" name="cpfFunc" id="cpfFuncModal" class="form-control" pattern="[0-9]{11}"required>
+						<input type="text" name="cpfFunc" id="cpfFuncModal" class="form-control" required>
 						<span class='msg-erro msg-cpf'></span>
 					</div>
 					<div class="form-group">

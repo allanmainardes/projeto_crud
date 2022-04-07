@@ -61,13 +61,14 @@ function validateForm(evt) {
     var funcNome = document.getElementById("nomeFuncModal");
     var funcCpf = document.getElementById("cpfFuncModal");
     var funcCpfTratado = funcCpf.value.replace(/[^\d]+/g, "");
+    funcCpf.value = funcCpfTratado;
     var funcEmail = document.getElementById("emailFuncModal");
     var funcDtNascimento = document.getElementById("dtNascimentoFuncModal");
     var nomePattern = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
     var emailPattern =
         /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     var contErro = 0;
-
+    console.log(funcCpfTratado);
     //validar nome
     if (
         funcNome.value == "" ||
