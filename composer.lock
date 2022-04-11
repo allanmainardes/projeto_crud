@@ -14,7 +14,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.0",
-        "php-mysql": "^7,0",
+        "ext-mysql": "*",
         "mysql": "5.7"
     },
     "platform-dev": [],
