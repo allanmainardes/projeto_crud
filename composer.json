@@ -12,5 +12,9 @@
             "email": "fernandomainardes1@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.0",
+        "php-mysql": "^7.0",
+        "mysql": "~5.7"
+    }
 }
